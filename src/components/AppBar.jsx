@@ -36,7 +36,7 @@ function AppBar({ title }) {
               isActive ? "appbar-link active" : "appbar-link"
             }
           >
-            Admin
+            Dashboard
           </NavLink>
         </nav>
       </div>

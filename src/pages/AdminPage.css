@@ -2,6 +2,29 @@
   margin-bottom: 24px;
 }
 
+.week-range-box {
+  margin-bottom: 18px;
+  padding: 16px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.week-range-label {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.week-range-title {
+  margin: 0;
+  font-size: 24px;
+  color: var(--text);
+}
+
 .week-navigation {
   display: flex;
   gap: 12px;

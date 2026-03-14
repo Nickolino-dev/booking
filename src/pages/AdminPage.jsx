@@ -10,6 +10,14 @@ function AdminPage({ bookings, deleteBooking }) {
     return date.toLocaleDateString("sv-SE");
   }
 
+  function formatDisplayDate(date) {
+    return date.toLocaleDateString("it-IT", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  }
+
   function getStartOfWeek(date) {
     const newDate = new Date(date);
     const day = newDate.getDay();
@@ -50,6 +58,7 @@ function AdminPage({ bookings, deleteBooking }) {
 
   const startOfWeek = getStartOfWeek(currentDate);
   const weekDays = getWeekDays(startOfWeek);
+  const endOfWeek = weekDays[6];
 
   const sortedBookings = [...bookings].sort((a, b) => {
     const first = `${a.date} ${a.time}`;
@@ -61,9 +70,13 @@ function AdminPage({ bookings, deleteBooking }) {
     <div className="page-container">
       <div className="admin-header">
         <h1 className="section-title">Dashboard Admin</h1>
-        <p className="section-subtitle">
-          Vista settimanale compatta delle prenotazioni.
-        </p>
+      </div>
+
+      <div className="week-range-box">
+        <p className="week-range-label">Settimana visualizzata</p>
+        <h2 className="week-range-title">
+          {formatDisplayDate(startOfWeek)} - {formatDisplayDate(endOfWeek)}
+        </h2>
       </div>
 
       <div className="week-navigation">

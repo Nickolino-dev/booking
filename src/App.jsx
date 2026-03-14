@@ -33,7 +33,7 @@ function App() {
   }, [bookings]);
 
   const titles = {
-    "/": "Centro Estetico",
+    "/": "Tizy & Lory",
     "/booking": "Prenota appuntamento",
     "/admin": "Dashboard Admin",
   };
