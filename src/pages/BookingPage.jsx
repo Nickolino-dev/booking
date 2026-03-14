@@ -1,25 +1,36 @@
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import services from "../data/services";
+import ServiceCard from "../components/ServiceCard";
 import BookingSection from "../components/BookingSection";
+import { useBookingsContext } from "../context/BookingsContext";
 
-function BookingPage({ bookings, addBooking }) {
-  const location = useLocation();
-  const service = location.state?.service;
+function BookingPage() {
+  const [selectedService, setSelectedService] = useState(null);
+  const { bookings, addBooking } = useBookingsContext();
 
   return (
-    <div className="page-container">
-      <h1 className="section-title">Prenotazioni</h1>
-      <p className="section-subtitle">
-        Scegli data e orario per il trattamento selezionato.
-      </p>
+    <div className="max-w-2xl mx-auto w-full px-4 py-8">
+      <h1 className="text-2xl font-bold text-gray-800 mb-2">Nuova prenotazione</h1>
+      <p className="text-gray-600 mb-6">Scegli un trattamento, poi seleziona data e orario.</p>
 
-      {service ? (
+      {!selectedService && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
+          {services.map((service) => (
+            <ServiceCard
+              key={service.id}
+              service={service}
+              onBook={() => setSelectedService(service)}
+            />
+          ))}
+        </div>
+      )}
+
+      {selectedService && (
         <BookingSection
-          service={service}
+          service={selectedService}
           bookings={bookings}
           addBooking={addBooking}
         />
-      ) : (
-        <p>Nessun servizio selezionato.</p>
       )}
     </div>
   );

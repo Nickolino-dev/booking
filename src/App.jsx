@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
+import { BookingsProvider } from "./context/BookingsProvider";
 import AppBar from "./components/AppBar";
 import Home from "./pages/Home";
 import BookingPage from "./pages/BookingPage";
@@ -7,30 +7,6 @@ import AdminPage from "./pages/AdminPage";
 
 function App() {
   const location = useLocation();
-
-  const [bookings, setBookings] = useState(() => {
-    const savedBookings = localStorage.getItem("bookings");
-
-    if (savedBookings) {
-      return JSON.parse(savedBookings);
-    }
-
-    return [];
-  });
-
-  function addBooking(newBooking) {
-    setBookings((prevBookings) => [...prevBookings, newBooking]);
-  }
-
-  function deleteBooking(bookingId) {
-    setBookings((prevBookings) =>
-      prevBookings.filter((booking) => booking.id !== bookingId),
-    );
-  }
-
-  useEffect(() => {
-    localStorage.setItem("bookings", JSON.stringify(bookings));
-  }, [bookings]);
 
   const titles = {
     "/": "Tizy & Lory",
@@ -41,27 +17,18 @@ function App() {
   const title = titles[location.pathname] || "Centro Estetico";
 
   return (
-    <div className="app-shell">
-      <AppBar title={title} />
-
-      <main className="main-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/booking"
-            element={
-              <BookingPage bookings={bookings} addBooking={addBooking} />
-            }
-          />
-          <Route
-            path="/admin"
-            element={
-              <AdminPage bookings={bookings} deleteBooking={deleteBooking} />
-            }
-          />
-        </Routes>
-      </main>
-    </div>
+    <BookingsProvider>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-100 flex flex-col">
+        <AppBar title={title} />
+        <main className="flex-1 flex flex-col items-center justify-center p-4">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/booking" element={<BookingPage />} />
+            <Route path="/admin" element={<AdminPage />} />
+          </Routes>
+        </main>
+      </div>
+    </BookingsProvider>
   );
 }
 
