@@ -127,12 +127,23 @@ function NewBookingModal({ open, onClose, onCreate }) {
             <div className="flex flex-col sm:flex-row gap-3 mt-auto">
               <div className="flex-1">
                 <label className="block text-sm font-medium text-gray-700">Nome</label>
-                <input value={customerName} onChange={(e) => setCustomerName(e.target.value)} required className="mt-1 block w-full rounded border-gray-300 focus:border-purple-500 focus:ring-purple-500" />
+                <input value={customerName} onChange={(e) => setCustomerName(e.target.value)} required className="mt-1 block w-full rounded border border-gray-300 px-3 py-2 focus:border-purple-500 focus:ring-purple-500" />
               </div>
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">Telefono</label>
-                <input value={customerPhone} onChange={(e) => setCustomerPhone(e.target.value)} required className="mt-1 block w-full rounded border-gray-300 focus:border-purple-500 focus:ring-purple-500" />
+                <label className="block text-sm font-medium text-gray-700">Cognome</label>
+                <input value={customerPhone} onChange={(e) => setCustomerPhone(e.target.value)} required className="mt-1 block w-full rounded border border-gray-300 px-3 py-2 focus:border-purple-500 focus:ring-purple-500" />
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex-1 mt-2">
+                <label className="block text-sm font-medium text-gray-700">Numero di telefono</label>
+                <input value={customerPhone} onChange={(e) => setCustomerPhone(e.target.value)} required className="mt-1 block w-full rounded border border-gray-300 px-3 py-2 focus:border-purple-500 focus:ring-purple-500" />
                 {phoneError && <p className="text-red-500 text-xs mt-1">{phoneError}</p>}
+              </div>
+              <div className="flex-1 mt-2">
+                <label className="block text-sm font-medium text-gray-700">Email (opzionale)</label>
+                <input value={""} onChange={() => {}} placeholder="es. nome@dominio.it" className="mt-1 block w-full rounded border border-gray-300 px-3 py-2 focus:border-purple-500 focus:ring-purple-500" />
               </div>
             </div>
 
