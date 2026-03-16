@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 
-function AppBar({ title }) {
+function AppBar({ title, onOpenNewBooking }) {
   const [open, setOpen] = useState(false);
 
   const navLinkBase =
@@ -39,12 +39,13 @@ function AppBar({ title }) {
 
         {/* Right actions */}
         <div className="hidden sm:flex items-center gap-2">
-          <Link
-            to="/booking"
+          <button
+            type="button"
+            onClick={() => onOpenNewBooking && onOpenNewBooking()}
             className="px-3 py-2 rounded-md bg-purple-600 text-white text-sm font-semibold hover:bg-purple-700 transition shadow-sm"
           >
             Nuova prenotazione
-          </Link>
+          </button>
         </div>
 
         {/* Mobile toggle */}
@@ -91,13 +92,13 @@ function AppBar({ title }) {
             <NavLink to="/admin" className={navLinkClass} onClick={() => setOpen(false)}>
               Dashboard
             </NavLink>
-            <Link
-              to="/booking"
+            <button
+              type="button"
               className="mt-1 px-3 py-2 rounded-md bg-purple-600 text-white text-sm font-semibold hover:bg-purple-700 transition text-center"
-              onClick={() => setOpen(false)}
+              onClick={() => { setOpen(false); onOpenNewBooking && onOpenNewBooking(); }}
             >
               Nuova prenotazione
-            </Link>
+            </button>
           </div>
         </div>
       )}
